@@ -4,6 +4,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { FaShoppingCart } from "react-icons/fa";
 import { toggleCart } from "../shoppingCart/cartSlice";
+import { motion } from "framer-motion";
 
 export const NavBar = (props) => {
   const { toggleCart } = props;
@@ -12,9 +13,11 @@ export const NavBar = (props) => {
       <div className="bg-white rounded-lg px-1 h-min">
         <h1 className="text-xl text-gray-80 font-bold">LOGO HERE</h1>
       </div>
-      <Button className="p-3 rounded-xl" onClick={toggleCart}>
-        <FaShoppingCart className="text-2xl" />
-      </Button>
+      <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+        <Button className="p-3 rounded-xl" onClick={toggleCart}>
+          <FaShoppingCart className="text-2xl" />
+        </Button>
+      </motion.button>
     </nav>
   );
 };

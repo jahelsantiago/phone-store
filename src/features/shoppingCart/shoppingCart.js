@@ -5,17 +5,26 @@ import ItemShoppingCart from "./itemShoppingCart";
 import { selectCartItems, selectCartOpen } from "./cartSlice";
 import shoppingCartTypes from "./shoppingCartTypes";
 import TotalShoppingCart from "./totalShoppingCart";
+import { motion } from "framer-motion";
+
+const variants = {
+  open: { y: 0 },
+  closed: { y: "-100%" },
+};
 
 export const shoppingCart = (props) => {
   const { open, items } = props;
-  if (!open) {
-    return null;
-  }
-  console.log(items);
+
   return (
-    <aside className="fixed top-0 z-20 h-full w-10/12 sm:w-80 bg-gray-300  border-r-2 border-blue-800">
+    <motion.nav
+      animate={open ? "open" : "closed"}
+      variants={variants}
+      className="fixed top-0 z-20 h-full w-10/12 sm:w-80 bg-gray-300  border-r-2 border-blue-800"
+    >
       <div className="relative h-screen">
-        <h2 className="text-center font-bold text-2xl text-blue-800 p-2">Shopping Cart</h2>
+        <h2 className="text-center font-bold text-2xl text-blue-800 p-2">
+          Shopping Cart
+        </h2>
         <div className="flex flex-col gap-2 p-2">
           {items.map((item) => (
             <ItemShoppingCart key={item.id} item={item} />
@@ -25,7 +34,7 @@ export const shoppingCart = (props) => {
           <TotalShoppingCart />
         </div>
       </div>
-    </aside>
+    </motion.nav>
   );
 };
 
